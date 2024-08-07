@@ -50,6 +50,11 @@ React Redux  installation
 npm i react-redux
 ````
 
+[https://react-icons.github.io/react-icons/](https://react-icons.github.io/react-icons/)
+````js
+npm install react-icons --save
+````
+
 tailwind.config.ts
 ````js
 import type { Config } from "tailwindcss";
@@ -138,3 +143,4 @@ import type { RootState, AppDispatch } from "./store";
 export const useAppDispatch = () => useDispatch<AppDispatch>();
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
 ````
+
