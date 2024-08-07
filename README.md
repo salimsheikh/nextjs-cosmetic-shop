@@ -35,17 +35,106 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
 
-
-
-
+Create App
 ````js
 npx create-next-app@latest nextjs-cosmetic-shop
 ````
 
+Reducx toolkit installation
 ````js
 npm i @reduxjs/toolkit
 ````
 
+React Redux  installation
 ````js
 npm i react-redux
+````
+
+tailwind.config.ts
+````js
+import type { Config } from "tailwindcss";
+
+const config: Config = {
+  content: [
+    "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+  ],
+  theme: {
+    extend: {
+      colors: {
+        accent: "#EC2D9E"
+      },
+      container: {
+        center: true,
+        padding: "15px",
+      }
+    },
+  },
+  plugins: [],
+};
+export default config;
+````
+## Redux Settings
+redux/features/cartSlice.ts
+````js
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+
+interface IProduct {
+    id: number;
+    name: string;
+    img: string;
+    price: number;
+    quantity: number;
+}
+
+const initialState: Array<IProduct> = [];
+export const cartSlice = createSlice({
+    name: "cartSlice",
+    initialState,
+    reducers: {
+        addToCart: (state, action: PayloadAction<IProduct>) => {
+            if(state.findIndex(pro => pro.id === action.payload.id) === -1){
+                state.push(action.payload)
+            }else{
+                return state.map((item) => {
+                    return item.id === action.payload.id ? {...item, quantity: item.quantity + 1} : item;
+                });
+            }
+        },
+
+        removeFromCart :  (state, action: PayloadAction<number>) =>{
+            const id = action.payload
+            return state.filter(item => item.id !== id)
+        }
+    }
+});
+
+export const {addToCart, removeFromCart} = cartSlice.actions
+export default cartSlice.reducer;
+
+````
+
+redux/store.ts
+````js
+import { configureStore } from "@reduxjs/toolkit";
+import cartReducer from "./features/cartSlice"
+
+export const store  = configureStore({
+    reducer: {
+        cartReducer
+    }
+})
+
+export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;
+````
+
+redux/hooks.ts
+````js
+import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
+import type { RootState, AppDispatch } from "./store";
+
+export const useAppDispatch = () => useDispatch<AppDispatch>();
+export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
 ````
