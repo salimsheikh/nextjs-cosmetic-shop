@@ -144,3 +144,14 @@ export const useAppDispatch = () => useDispatch<AppDispatch>();
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
 ````
 
+[https://react-hot-toast.com/](https://react-hot-toast.com/)
+````bash
+npm add react-hot-toast
+
+import {toast} from "react-hot-toast";
+
+<Toaster
+  position="top-center"
+  reverseOrder={false}
+/>
+````
