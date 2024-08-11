@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from 'react';
 import { Whisper } from 'next/font/google';
-import ProductData from "@/utils/productData";
+import ProductJsonData from "@/utils/productData";
 import ProductCard, { IProduct } from './ProductCard';
 
 const whisper = Whisper({subsets: ["latin"], weight: ["400"]});
@@ -17,7 +17,7 @@ const NewArrival = () => {
   const[selectedTab, setSelectedTab] = useState(0);
 
   useEffect(() => {
-    setData(shuffleArray(ProductData).slice(0,15));
+    setData(shuffleArray(ProductJsonData).slice(0,15));
   },[]);
 
   const tabsData = ["All", "Skin Care", "Lipsticks", "Makeup", "Nail & Wax"];
@@ -28,11 +28,11 @@ const NewArrival = () => {
     setSelectedTab(index);
 
     if(category === 'all'){
-      setData(shuffleArray(ProductData).slice(0,15));
+      setData(shuffleArray(ProductJsonData).slice(0,15));
       return;
     }
 
-    const filteredData = ProductData.filter((item) => {      
+    const filteredData = ProductJsonData.filter((item) => {      
       return item.category.includes(category);
     });   
 

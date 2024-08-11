@@ -1,3 +1,4 @@
+import { useAppSelector } from "@/redux/hooks";
 import Link from "next/link";
 import React, { SetStateAction } from "react";
 import { AiOutlineShoppingCart } from "react-icons/ai";
@@ -9,7 +10,7 @@ interface PropsType {
 }
 
 const NavBar = ({ setShowCart }: PropsType) => {
-  const cartCount = 0;
+  const cartCount = useAppSelector((state) => state.cartReducer.length);
   return (
     <div className="bg-white py-4 sticky top-0 z-10">
       <div className="container flex justify-between items-center">
