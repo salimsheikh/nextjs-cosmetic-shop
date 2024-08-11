@@ -35,7 +35,34 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
 
-Create App
+## Cone
+
+Copy Below Code to clone project
+````js
+git clone https://github.com/salimsheikh/nextjs-cosmetic-shop.git
+````
+
+Change the direcotry.
+
+````js
+cd nextjs-cosmetic-shop
+````
+
+Install Dependencies
+
+````js
+npm install
+````
+
+Install autoprefixer
+
+````js
+npm install autoprefixer
+````
+
+
+## Create App
+
 ````js
 npx create-next-app@latest nextjs-cosmetic-shop
 ````

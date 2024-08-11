@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 import React from 'react';
 import {toast} from "react-hot-toast";
 
-import { AiFillStar, AiOutlineStar, AiOutlineHeart, AiOutlineShoppingCart } from 'react-icons/ai';
+import { AiOutlineHeart, AiOutlineShoppingCart } from 'react-icons/ai';
 import RandomRatings from './RandomRatings';
 
 export interface IProduct{
@@ -17,7 +17,6 @@ export interface IProduct{
     sale?: boolean | undefined;    
 }
 
-
 const ProductCard = ({id,img,name,price,sale}:IProduct) => {
     const dispatch = useAppDispatch();
     // const router = useRouter();
@@ -27,6 +26,8 @@ const ProductCard = ({id,img,name,price,sale}:IProduct) => {
         dispatch(addToCart(payload));
         toast.success("Item added to cart successfully.");
     }
+
+
   return (
     <div className='cursor-pointer group'>
       <div className='relative'>
@@ -43,11 +44,12 @@ const ProductCard = ({id,img,name,price,sale}:IProduct) => {
             </div>            
         </div>
       </div>
-      <div className='flex justify-center text-accent pt-4 pb-2'>
+      <div className='text-center'>
         <RandomRatings />
-      </div>
-      <h2 className='font-medium pb-3 hover:text-accent'>{name}</h2>
-      <p className='text-gray-600 font-light'>{price}</p>
+        <h2 className='font-medium pb-3 hover:text-accent'>{name}</h2>
+        <p className='text-gray-600 font-light'>${price}.00</p>
+        </div>
+      
     </div>
   );
 }

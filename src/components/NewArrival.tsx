@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { Whisper } from 'next/font/google';
 import ProductData from "@/utils/productData";
-import ProductCard from './ProductCard';
+import ProductCard, { IProduct } from './ProductCard';
 
 const whisper = Whisper({subsets: ["latin"], weight: ["400"]});
 
@@ -20,10 +20,12 @@ const NewArrival = () => {
     setData(shuffleArray(ProductData).slice(0,15));
   },[]);
 
-  const tabsData = ["All", "Skin Care", "Lipstics", "Makeup", "Nail & Wax"];
+  const tabsData = ["All", "Skin Care", "Lipsticks", "Makeup", "Nail & Wax"];
 
   const handleTab = (index: number) => {
     const category = tabsData[index].toLowerCase();
+
+    
 
     setSelectedTab(index);
 
@@ -32,9 +34,12 @@ const NewArrival = () => {
       return;
     }
 
-    const filteredData = ProductData.filter((item) => {
-      item.category.includes(category);
+    const filteredData = ProductData.filter((item) => {      
+      return item.category.includes(category);
     });
+
+    console.log(filteredData);
+
     setData(shuffleArray(filteredData));
   }
 
@@ -54,7 +59,7 @@ const NewArrival = () => {
 
       <div className='grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 pt-8'>
         {data?.map((item:IProduct, index: number) => (
-          <ProductCard key={item.id} id={item.id} img={item.img} name={item.name} price={item.price} sale={item.sale} />
+          <ProductCard key={item.id} id={item.id} img={item.img} name={item.name} price={item.price} sale={item.sale} category={[]} />
         ))}
       </div>
     </div>
