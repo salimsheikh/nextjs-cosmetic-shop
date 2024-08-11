@@ -23,9 +23,7 @@ const NewArrival = () => {
   const tabsData = ["All", "Skin Care", "Lipsticks", "Makeup", "Nail & Wax"];
 
   const handleTab = (index: number) => {
-    const category = tabsData[index].toLowerCase();
-
-    
+    const category = tabsData[index].toLowerCase();    
 
     setSelectedTab(index);
 
@@ -36,9 +34,7 @@ const NewArrival = () => {
 
     const filteredData = ProductData.filter((item) => {      
       return item.category.includes(category);
-    });
-
-    console.log(filteredData);
+    });   
 
     setData(shuffleArray(filteredData));
   }
